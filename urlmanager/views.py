@@ -15,12 +15,11 @@ def create(request):
         data = slug
     context = {
         'data':data,
-        'real_link': link,
     }
     return render(request, 'urlmanager/index.html', context)
 
 def real(request, slug):
-    real_url = UrlData.objects.all().filter(slug=slug)
+    real_url = UrlData.objects.get(slug=slug)
     if real_url:
         return redirect(real_url.link)
     else:
